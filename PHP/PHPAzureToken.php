@@ -38,6 +38,7 @@ function curlRequest($url, $authHeader)
 $accessToken = getToken($azure_key);
 $params = "text=" . urlencode($inputStr) . "&to=" . $toLanguage . "&from=" . $fromLanguage . "&appId=Bearer+" . $accessToken;
 $translateUrl = "http://api.microsofttranslator.com/v2/Http.svc/Translate?$params";
+$authHeader = "Authorization: Bearer ". $accessToken;
 $curlResponse = curlRequest($translateUrl, $authHeader);
 $xmlObj = simplexml_load_string($curlResponse);
 foreach ((array)$xmlObj[0] as $val) {
